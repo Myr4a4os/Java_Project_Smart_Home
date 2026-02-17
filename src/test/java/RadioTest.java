@@ -141,7 +141,7 @@ public class RadioTest {
     public void shouldVolume0() {
         Radio radio = new Radio();
         radio.setCurrentSoundVolume(1);     // Работа на нижней границе
-        radio.dereaseVolume();
+        radio.decreaseVolume();
         Assertions.assertEquals(0, radio.getCurrentSoundVolume());
     }
 
@@ -149,7 +149,7 @@ public class RadioTest {
     public void shouldDecreaseMiddleVolume() {
         Radio radio = new Radio();
         radio.setCurrentSoundVolume(50);     // Работа на нижней границе
-        radio.dereaseVolume();
+        radio.decreaseVolume();
         Assertions.assertEquals(49, radio.getCurrentSoundVolume());
     }
 
@@ -157,7 +157,7 @@ public class RadioTest {
     public void shouldNotDecreaseBelowZero() {
         Radio radio = new Radio();
         radio.setCurrentSoundVolume(0);     // Работа на нижней границе
-        radio.dereaseVolume();
+        radio.decreaseVolume();
         Assertions.assertEquals(0, radio.getCurrentSoundVolume());
     }
 
@@ -165,7 +165,7 @@ public class RadioTest {
     public void shouldDecreaseFromMaxVolume() {
         Radio radio = new Radio();
         radio.setCurrentSoundVolume(100);     // Работа на нижней границе
-        radio.dereaseVolume();
+        radio.decreaseVolume();
         Assertions.assertEquals(99, radio.getCurrentSoundVolume());
     }
 }
