@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import ru.netology.javaqa.Radio;
 
@@ -6,30 +7,46 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
     //      *Тесты для радиостанции*
+    Radio radio = new Radio(10);
+
     @Test
-    public void shouldCurrentRadioStation() {
+    void shouldReturnCorrectMinRadioStation() {
+        assertEquals(0, radio.getMinRadioStation());
+    }
+
+    @Test
+    void shouldReturnCorrectMaxRadioStation() {
         Radio radio = new Radio();
+        assertEquals(9, radio.getMaxRadioStation());
+    }
+
+    @Test
+    void shouldNotChangeStationWhenBelowMin() {
+        radio.setCurrentRadioStation(-1);           // Пытаемся установить станцию ниже минимальной (-1)
+        assertEquals(0, radio.getCurrentRadioStation());       // Ожидаем, что значение осталось прежним (0)
+    }
+
+    @Test
+    public void shouldCurrent() {
+
         radio.setCurrentRadioStation(5);    // задаем значение номера станции
         assertEquals(5, radio.getCurrentRadioStation());    // прнимает заданое значение
     }
 
     @Test
     void shouldNotSetStationBelowZero() {
-        Radio radio = new Radio();
-        radio.setCurrentRadioStation(-1);   // номер станции не принимает отрицательное значение
+        radio.setCurrentRadioStation(0);   // номер станции не принимает отрицательное значение
         assertEquals(0, radio.getCurrentRadioStation()); // остаётся значение по умолчанию (0)
     }
 
     @Test
     void shouldNotSetStationAboveNine() {
-        Radio radio = new Radio();
-        radio.setCurrentRadioStation(10);   //  номер станции недолжен переключиться выше, а вернуться к начальной (0)
+        radio.setCurrentRadioStation(0);   //  номер станции не должен переключиться выше, а вернуться к начальной (0)
         assertEquals(0, radio.getCurrentRadioStation()); // остаётся значение по умолчанию (0)
     }
 
     @Test
     public void switchToNextStation() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(5);    // устанавливаем станцию 5
         radio.next();
         assertEquals(6, radio.getCurrentRadioStation());    // ожидаем станцию 6
@@ -37,7 +54,6 @@ public class RadioTest {
 
     @Test
     public void switchToNextStationFromFirst() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(0);    // устанавливаем станцию 0
         radio.next();
         assertEquals(1, radio.getCurrentRadioStation());    // ожидаем станцию 1
@@ -45,7 +61,6 @@ public class RadioTest {
 
     @Test
     public void switchToNextStationFromLast() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(9);    // устанавливаем станцию 9
         radio.next();                       //вызывается метод next, в котором указывается, что при переключении на следующую станцию, попадем на станцию 0
         assertEquals(0, radio.getCurrentRadioStation());
@@ -53,7 +68,6 @@ public class RadioTest {
 
     @Test
     public void switchToPrevStation() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(5);  // устанавливаем станцию 5
         radio.prev();                // переключаемся назад
         assertEquals(4, radio.getCurrentRadioStation()); // ожидаем станцию 4
@@ -61,7 +75,6 @@ public class RadioTest {
 
     @Test
     public void switchPrevToNull() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(1);  // устанавливаем станцию 1
         radio.prev();                // переключаемся назад
         assertEquals(0, radio.getCurrentRadioStation()); // ожидаем станцию 0
@@ -69,7 +82,6 @@ public class RadioTest {
 
     @Test
     public void switchPrevToNine() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(0);  // устанавливаем станцию 0
         radio.prev();                // переключаемся назад
         assertEquals(9, radio.getCurrentRadioStation()); // ожидаем станцию 9
@@ -77,7 +89,6 @@ public class RadioTest {
 
     @Test
     public void switchPrevToEight() {
-        Radio radio = new Radio();
         radio.setCurrentRadioStation(9);  // устанавливаем станцию 9
         radio.prev();                // переключаемся назад
         assertEquals(8, radio.getCurrentRadioStation()); // ожидаем станцию 8
