@@ -10,6 +10,23 @@ public class RadioTest {
     Radio radio = new Radio(10);
 
     @Test
+    void shouldReturnCorrectMinRadioStation() {
+        assertEquals(0, radio.getMinRadioStation());
+    }
+
+    @Test
+    void shouldReturnCorrectMaxRadioStation() {
+        Radio radio = new Radio();
+        assertEquals(9, radio.getMaxRadioStation());
+    }
+
+    @Test
+    void shouldNotChangeStationWhenBelowMin() {
+        radio.setCurrentRadioStation(-1);           // Пытаемся установить станцию ниже минимальной (-1)
+        assertEquals(0, radio.getCurrentRadioStation());       // Ожидаем, что значение осталось прежним (0)
+    }
+
+    @Test
     public void shouldCurrent() {
 
         radio.setCurrentRadioStation(5);    // задаем значение номера станции
